@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Consensus Virtualisation</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- For loading external data files -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise,fetch"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.21.0/cytoscape.min.js"></script>
+
+    </head>
+    <body>
+        <div id="toolbar">
+        <button class="btn" id="resetBtn">Reset Graph</button>
+        <button class="btn" id="animateBtn">Animate Graph by 1 step</button>
+    </div>
+    <h1>Consensus</h1>
+    <div id="cy"></div>
+    <!-- Load application code at the end to ensure DOM is loaded -->
+    <script src="script.js"></script>
+    </body>
+</html>
