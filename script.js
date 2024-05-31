@@ -41,10 +41,10 @@ fetch('data.json', {mode: 'no-cors'})
         elements: data
     });
     
+    
     var nodes = cy.nodes()
     nodes[0].data('color','#ff0000')
     nodes[1].data('color','#0000ff')
-    initialElements = cy.elements().jsons();
     normalizeWeights()
 
     function normalizeWeights() {
@@ -69,6 +69,7 @@ fetch('data.json', {mode: 'no-cors'})
             var weights = node.outgoers('edge').map(function(edge) {
                 return edge.data('weight')
             });
+            console.log(node.data())
             let cumulativeWeight = 0
             if(neighbors) {
                 const random = Math.random() 
@@ -94,19 +95,15 @@ fetch('data.json', {mode: 'no-cors'})
     };
 
     function reloadGraph() {
-        cy.elements().remove();
-        cy.add(initialElements);
-        normalizeWeights();
-        console.clear();
-        nodes = cy.nodes()
-    }
+        location.reload();
+    };
 
     // Add event listeners to toolbar buttons
     document.getElementById('resetBtn').addEventListener('click', function() {
-        reloadGraph();
+        reloadGraph()
     });
 
     document.getElementById('animateBtn').addEventListener('click', function() {
-        animate();
+        animate()
     });
 });
