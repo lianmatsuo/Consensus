@@ -43,8 +43,6 @@ fetch('data.json', {mode: 'no-cors'})
     
     
     var nodes = cy.nodes()
-    nodes[0].data('color','#ff0000')
-    nodes[1].data('color','#0000ff')
     normalizeWeights()
 
     function normalizeWeights() {
@@ -69,7 +67,7 @@ fetch('data.json', {mode: 'no-cors'})
             var weights = node.outgoers('edge').map(function(edge) {
                 return edge.data('weight')
             });
-            console.log(node.data())
+            //console.log(node.data())
             let cumulativeWeight = 0
             if(neighbors) {
                 const random = Math.random() 
@@ -84,8 +82,8 @@ fetch('data.json', {mode: 'no-cors'})
                                 duration: 1000
                             })
                             node.data('color', chosenNeighbor.data('color'))
-                            console.log(node.data())
-                            console.log(chosenNeighbor.data())
+                            //console.log(node.data())
+                            //console.log(chosenNeighbor.data())
                         };
                         break;
                     };
@@ -93,6 +91,36 @@ fetch('data.json', {mode: 'no-cors'})
             };
         });
     };
+
+    function checkConsensus() {
+        var firstNodeValue
+        for(let i = 0; i< nodes.length; i++) {
+            if(nodes[i].data('color') != '#808080') {
+                firstNodeValue = nodes[i].data('color')
+                console.log(firstNodeValue)
+                break
+            };
+        };
+        for(let i = 0; i< nodes.length; i++) {
+            if((nodes[i].data('color') != '#808080') && firstNodeValue != nodes[i].data('color')) {
+                return false
+            };
+        };
+        console.log("TRUE")
+        return true
+    };
+
+    function simulate() {
+        for(let i = 0; i< 50; i++) {
+            setTimeout(function() {
+                animate();
+            }, 3000);
+            if(checkConsensus()) {
+                console.log("Consensus reached")
+                break
+            }
+        };
+    }
 
     function reloadGraph() {
         location.reload();
@@ -105,5 +133,26 @@ fetch('data.json', {mode: 'no-cors'})
 
     document.getElementById('animateBtn').addEventListener('click', function() {
         animate()
+    });
+
+    document.getElementById('simulateBtn').addEventListener('click', function() {
+        simulate()
+    });
+
+    // Add event listener to the color selection buttons
+    document.getElementById('selectBlueBtn').addEventListener('click', function() {
+        cy.on('tap', 'node', function(event) {
+            var selectedNode = event.target;
+            selectedNode.data('color', '#0000ff')
+            cy.off('tap', 'node');
+        });
+    });
+
+    document.getElementById('selectRedBtn').addEventListener('click', function() {
+        cy.on('tap', 'node', function(event) {
+            var selectedNode = event.target;
+            selectedNode.data('color', '#ff0000')
+            cy.off('tap', 'node');
+        });
     });
 });

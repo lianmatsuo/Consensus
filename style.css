@@ -3,7 +3,7 @@ body {
     font-size: 14px;
 }
 #toolbar {
-    width: 800px;
+    width: 95%;
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -17,9 +17,6 @@ body {
     width: 90%;
     height: 90%;
     position: absolute;
-    left: 0;
-    top: 0;
-    margin-top: 5%;
 }
 
 h1 {
