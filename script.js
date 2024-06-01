@@ -160,6 +160,7 @@ fetch('data.json', {mode: 'no-cors'})
     function changePValue() {
         let pValue;
         do {
+            pValue = 0
             pValue = prompt('Please enter a value between 0-1:');
             if(pValue == null) {
                 console.log('User cancelled the prompt.');
