@@ -160,7 +160,6 @@ fetch('data.json', {mode: 'no-cors'})
     function changePValue() {
         let pValue;
         do {
-            pValue = 0
             pValue = prompt('Please enter a value between 0-1:');
             if(pValue == null) {
                 console.log('User cancelled the prompt.');
@@ -172,8 +171,9 @@ fetch('data.json', {mode: 'no-cors'})
                 edge.data('weight', String(pValue))
             }
         });
-        normalizeWeights(pValue)
-    }
+        if(pValue) {
+            normalizeWeights(pValue)
+        }
 
     // Add event listeners to toolbar buttons
     document.getElementById('resetBtn').addEventListener('click', function() {
