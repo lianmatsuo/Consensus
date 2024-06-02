@@ -231,7 +231,7 @@ fetch('data.json', {mode: 'no-cors'})
     });
     // animates all nodes for 1 iteration 
     document.getElementById('animateBtn').addEventListener('click', function() {
-        animate()
+        iterate()
     });
     // simulates all nodes for 50 iterations 
     document.getElementById('simulateBtn').addEventListener('click', function() {
